@@ -4,7 +4,7 @@ let move = 0;
 let result = '';
 
 boxes.forEach((item) => {
-  item.addEventListener('click', clickBox, { once: true });
+  item.addEventListener('click', clickBox);
 })
 
 function clickBox(e) {
