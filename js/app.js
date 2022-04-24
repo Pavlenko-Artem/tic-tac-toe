@@ -1,13 +1,11 @@
-const boxes = document.querySelectorAll('.box')
+const boxes = document.querySelectorAll('.box');
+const modalResult = document.querySelector('.modal');
 let move = 0;
 let result = '';
 
 boxes.forEach((item) => {
   item.addEventListener('click', clickBox, { once: true });
 })
-
-
-// area.addEventListener('click', clickBox)
 
 function clickBox(e) {
   move % 2 == 0
@@ -49,5 +47,22 @@ const check = () => {
 }
 
 const prepareResult = (result) => {
-  console.log(result);
+  modalResult.style.display = 'flex';
+  modalResult.innerHTML = `
+    <h2>Победили ${result}</h2>
+    <button class="start-btn">Начать сначала</button>
+  `
+  beginAgain();
+}
+
+const beginAgain = () => {
+  const startBtn = document.querySelector('.start-btn');
+
+  startBtn.addEventListener('click', () => {
+    boxes.forEach((item) => {
+      item.innerHTML = '';
+    })
+    modalResult.style.display = 'none';
+    console.log('Modal');
+  })
 }
