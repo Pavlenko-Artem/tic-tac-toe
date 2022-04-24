@@ -59,3 +59,11 @@ body {
   align-items: center;
   justify-content: center;
 }
+
+.start-btn {
+  padding: 12px 15px;
+  background-color: rgb(14, 18, 255);
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+}

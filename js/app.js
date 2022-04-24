@@ -4,7 +4,7 @@ let move = 0;
 let result = '';
 
 boxes.forEach((item) => {
-  item.addEventListener('click', clickBox);
+  item.addEventListener('click', clickBox, { once: true });
 })
 
 function clickBox(e) {
@@ -12,6 +12,11 @@ function clickBox(e) {
     ? e.target.innerHTML = '<img class="symbol" src="img/cross.svg" alt="cross">'
     : e.target.innerHTML = '<img class="symbol" src="img/circle.svg" alt="circle">';
   move++;
+
+  if (move == 9) {
+    prepareResult()
+  }
+
   check()
 }
 
@@ -48,10 +53,18 @@ const check = () => {
 
 const prepareResult = (result) => {
   modalResult.style.display = 'flex';
-  modalResult.innerHTML = `
-    <h2>Победили ${result}</h2>
-    <button class="start-btn">Начать сначала</button>
-  `
+  if (move == 9) {
+    modalResult.innerHTML = `
+      <h2>Ничья</h2>
+      <button class="start-btn">Начать сначала</button>
+    `
+  } else {
+    modalResult.innerHTML = `
+      <h2>Победили ${result}</h2>
+      <button class="start-btn">Начать сначала</button>
+    `
+  }
+
   beginAgain();
 }
 
@@ -63,6 +76,9 @@ const beginAgain = () => {
       item.innerHTML = '';
     })
     modalResult.style.display = 'none';
-    console.log('Modal');
   })
+  boxes.forEach((item) => {
+    item.addEventListener('click', clickBox, { once: true });
+  })
+  move = 0;
 }
